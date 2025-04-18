@@ -1,0 +1,2232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Love Story</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
+    
+    :root {
+      --primary-color: #ff6b88;
+      --primary-light: #ffcad4;
+      --primary-dark: #d44d6e;
+      --secondary-color: #5e3c58;
+      --secondary-light: #8e5e76;
+      --background: #f9f3f3;
+      --white: #ffffff;
+      --gray-light: #f2f2f2;
+      --gray: #dddddd;
+      --text-dark: #333333;
+      --text-light: #666666;
+      --shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      --shadow-small: 0 4px 8px rgba(0, 0, 0, 0.08);
+      --border-radius: 12px;
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background-color: var(--background);
+      color: var(--text-dark);
+      line-height: 1.6;
+      font-family: 'Poppins', sans-serif;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Floating hearts background */
+    .hearts-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .heart-bg {
+      position: absolute;
+      font-size: 20px;
+      color: rgba(255, 107, 136, 0.15);
+      animation: float 15s linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.5;
+      }
+      90% {
+        opacity: 0.5;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    
+    header {
+      text-align: center;
+      padding: 40px 0;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+      border-radius: var(--border-radius);
+      margin-bottom: 40px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    
+    header:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(212, 77, 110, 0.3);
+    }
+    
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+      pointer-events: none;
+    }
+    
+    h1 {
+      color: var(--white);
+      font-size: 3.5rem;
+      margin-bottom: 15px;
+      font-family: 'Dancing Script', cursive;
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .subtitle {
+      color: var(--white);
+      font-weight: 300;
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    
+    section {
+      background-color: var(--white);
+      border-radius: var(--border-radius);
+      padding: 30px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border: 1px solid var(--gray);
+    }
+    
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+    }
+    
+    h2 {
+      color: var(--secondary-color);
+      margin-bottom: 25px;
+      font-size: 1.8rem;
+      font-weight: 600;
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 15px;
+      position: relative;
+      font-family: 'Playfair Display', serif;
+    }
+    
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 60px;
+      height: 2px;
+      background-color: var(--primary-color);
+    }
+    
+    h3 {
+      color: var(--secondary-light);
+      margin-bottom: 15px;
+      font-weight: 500;
+      font-size: 1.3rem;
+    }
+
+    /* Relationship progress */
+    .relationship-progress {
+      margin: 30px 0;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .progress-bar {
+      height: 20px;
+      background-color: var(--gray-light);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(to right, var(--primary-color), var(--primary-dark));
+      border-radius: 10px;
+      transition: width 1s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, 
+        rgba(255,255,255,0) 0%, 
+        rgba(255,255,255,0.3) 50%, 
+        rgba(255,255,255,0) 100%);
+      animation: progressShine 2s infinite;
+    }
+
+    @keyframes progressShine {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* First Met section */
+    .first-met {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin: 30px 0;
+      padding: 20px;
+      background-color: var(--gray-light);
+      border-radius: var(--border-radius);
+    }
+
+    .first-met-icon {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+    }
+
+    .first-met-details {
+      flex: 1;
+    }
+
+    .first-met-title {
+      font-weight: 600;
+      color: var(--secondary-color);
+      margin-bottom: 5px;
+    }
+
+    .first-met-date {
+      font-size: 1.2rem;
+      color: var(--primary-dark);
+      font-weight: 500;
+    }
+
+    .first-met-days {
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+    
+    /* Countdown styles */
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin: 30px 0;
+    }
+    
+    .countdown-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: var(--white);
+      border-radius: var(--border-radius);
+      padding: 15px 25px;
+      min-width: 120px;
+      box-shadow: var(--shadow-small);
+      border: 1px solid var(--primary-light);
+      transition: var(--transition);
+    }
+
+    .countdown-item:hover {
+      transform: translateY(-5px);
+      background-color: var(--primary-light);
+    }
+    
+    .countdown-number {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 10px;
+    }
+    
+    .countdown-label {
+      font-size: 1rem;
+      color: var(--secondary-light);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 500;
+    }
+    
+    /* Diary styles */
+    .diary-entries {
+      max-height: 400px;
+      overflow-y: auto;
+      margin-bottom: 30px;
+      padding-right: 15px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--primary-light) var(--gray-light);
+    }
+    
+    .diary-entries::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    .diary-entries::-webkit-scrollbar-track {
+      background: var(--gray-light);
+      border-radius: 10px;
+    }
+    
+    .diary-entries::-webkit-scrollbar-thumb {
+      background-color: var(--primary-light);
+      border-radius: 10px;
+    }
+    
+    .diary-entry {
+      background-color: var(--gray-light);
+      border-left: 4px solid var(--primary-color);
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 0 10px 10px 0;
+      transition: var(--transition);
+      position: relative;
+    }
+    
+    .diary-entry:hover {
+      transform: translateX(5px);
+      box-shadow: var(--shadow-small);
+    }
+
+    .diary-entry.favorite {
+      border-left: 4px solid #ffc107;
+      background-color: #fff8e1;
+    }
+    
+    .entry-date {
+      color: var(--secondary-light);
+      font-weight: 600;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .entry-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .entry-action {
+      background: none;
+      border: none;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 0.9rem;
+    }
+
+    .entry-action:hover {
+      color: var(--primary-color);
+    }
+
+    .favorite-btn.active {
+      color: #ffc107;
+    }
+    
+    .entry-text {
+      color: var(--text-dark);
+      line-height: 1.7;
+    }
+    
+    .diary-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      background-color: var(--gray-light);
+      padding: 20px;
+      border-radius: var(--border-radius);
+      position: relative;
+    }
+
+    .form-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .char-count {
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+
+    .char-count.warning {
+      color: var(--primary-dark);
+    }
+    
+    .diary-form textarea {
+      padding: 15px;
+      border: 1px solid var(--gray);
+      border-radius: var(--border-radius);
+      resize: vertical;
+      min-height: 120px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+    
+    .diary-form textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(255, 107, 136, 0.2);
+    }
+    
+    .diary-form button {
+      padding: 12px 20px;
+      background: linear-gradient(to right, var(--primary-color), var(--primary-dark));
+      border: none;
+      border-radius: var(--border-radius);
+      color: var(--white);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      align-self: flex-end;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .diary-form button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(212, 77, 110, 0.4);
+    }
+    
+    .diary-form button:active {
+      transform: translateY(0);
+    }
+
+    .diary-form button:disabled {
+      background: var(--gray);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    
+    /* Gallery styles */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+    
+    .gallery-item {
+      overflow: hidden;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-small);
+      cursor: pointer;
+      position: relative;
+      transition: var(--transition);
+      height: 220px;
+    }
+
+    .gallery-item.favorite {
+      box-shadow: 0 0 0 3px #ffc107;
+    }
+    
+    .gallery-item:hover {
+      transform: scale(1.03);
+      box-shadow: var(--shadow);
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+      color: var(--white);
+      padding: 20px 15px 15px;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: var(--transition);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .gallery-actions {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      gap: 5px;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .gallery-item:hover .gallery-actions {
+      opacity: 1;
+    }
+
+    .gallery-action {
+      background: rgba(0, 0, 0, 0.6);
+      border: none;
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .gallery-action:hover {
+      background: rgba(0, 0, 0, 0.8);
+      transform: scale(1.1);
+    }
+
+    .favorite-star.active {
+      color: #ffc107;
+    }
+    
+    .gallery-item:hover .gallery-caption {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Album tabs */
+    .album-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .album-tab {
+      padding: 8px 15px;
+      background-color: var(--gray-light);
+      border-radius: 20px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 0.9rem;
+      border: 1px solid var(--gray);
+    }
+
+    .album-tab:hover {
+      background-color: var(--primary-light);
+    }
+
+    .album-tab.active {
+      background-color: var(--primary-color);
+      color: white;
+      border-color: var(--primary-dark);
+    }
+    
+    /* Photo upload styles */
+    .photo-upload {
+      background-color: var(--gray-light);
+      padding: 25px;
+      border-radius: var(--border-radius);
+      margin-bottom: 30px;
+      border: 1px dashed var(--primary-light);
+    }
+    
+    .photo-upload-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .photo-upload-row {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+    
+    .photo-upload input[type="file"] {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid var(--gray);
+      border-radius: var(--border-radius);
+      background-color: var(--white);
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+    }
+    
+    .photo-upload input[type="text"] {
+      flex: 1;
+      padding: 12px 15px;
+      border: 1px solid var(--gray);
+      border-radius: var(--border-radius);
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+    
+    .photo-upload input[type="text"]:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(255, 107, 136, 0.2);
+    }
+    
+    .photo-upload button {
+      padding: 12px 20px;
+      background: linear-gradient(to right, var(--primary-color), var(--primary-dark));
+      border: none;
+      border-radius: var(--border-radius);
+      color: var(--white);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+    }
+    
+    .photo-upload button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(212, 77, 110, 0.4);
+    }
+    
+    .photo-upload button:active {
+      transform: translateY(0);
+    }
+
+    .photo-upload button:disabled {
+      background: var(--gray);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    
+    .preview-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 200px;
+      background-color: var(--white);
+      border: 1px solid var(--gray);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      transition: var(--transition);
+      position: relative;
+    }
+    
+    .preview-container:hover {
+      border-color: var(--primary-light);
+    }
+    
+    #imagePreview {
+      max-width: 100%;
+      max-height: 100%;
+      display: none;
+      object-fit: contain;
+    }
+
+    .upload-instructions {
+      position: absolute;
+      text-align: center;
+      color: var(--text-light);
+      padding: 20px;
+    }
+    
+    /* Modal for full-size images */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .modal.show {
+      opacity: 1;
+    }
+    
+    .modal-content {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 5px;
+      box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+    }
+    
+    .modal.show .modal-content {
+      transform: scale(1);
+    }
+    
+    .close-modal {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: var(--white);
+      font-size: 40px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .close-modal:hover {
+      color: var(--primary-color);
+      transform: rotate(90deg);
+    }
+
+    /* Loading spinner */
+    .spinner {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top: 4px solid var(--primary-color);
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Confirmation dialog */
+    .confirmation-dialog {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .dialog-content {
+      background-color: white;
+      padding: 30px;
+      border-radius: var(--border-radius);
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .dialog-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .dialog-btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .dialog-btn-cancel {
+      background-color: var(--gray-light);
+      color: var(--text-dark);
+    }
+
+    .dialog-btn-confirm {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .dialog-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-small);
+    }
+    
+    footer {
+      text-align: center;
+      padding: 30px 0;
+      color: var(--secondary-light);
+      font-size: 1rem;
+      font-weight: 300;
+    }
+    
+    /* Heart icon */
+    .heart {
+      color: var(--primary-color);
+      display: inline-block;
+      animation: heartbeat 1.5s infinite;
+    }
+    
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    /* Toast notifications */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 15px 25px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      z-index: 3000;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      .countdown {
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+      
+      .countdown-item {
+        min-width: 100px;
+        padding: 10px 15px;
+      }
+      
+      .countdown-number {
+        font-size: 2.2rem;
+      }
+      
+      .photo-upload-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      }
+
+      .first-met {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 15px;
+        margin: 20px auto;
+      }
+      
+      section {
+        padding: 20px;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .countdown-item {
+        min-width: 70px;
+        padding: 8px 12px;
+      }
+      
+      .countdown-number {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating hearts background -->
+  <div class="hearts-background" id="heartsBackground"></div>
+
+  <div class="container">
+    <header>
+      <h1>Our Love Story</h1>
+      <p class="subtitle">A journey of love, laughter, and memories</p>
+    </header>
+    
+    <section id="relationship">
+      <h2>Our Journey Together</h2>
+      
+      <div class="first-met">
+        <div class="first-met-icon">👩🏼‍❤️‍💋‍👨🏼</div>
+        <div class="first-met-details">
+          <div class="first-met-title">First Met</div>
+          <div class="first-met-date" id="firstMetDate">Loading...</div>
+          <div class="first-met-days" id="daysTogether">Loading...</div>
+        </div>
+      </div>
+      
+      <div class="relationship-progress">
+        <div class="progress-header">
+          <span>Relationship Strength</span>
+          <span id="progressPercent">100%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+    </section>
+    
+    <section id="countdown">
+      <h2>Countdown to Our Next Anniversary</h2>
+      <div class="countdown">
+        <div class="countdown-item">
+          <span class="countdown-number" id="days">00</span>
+          <span class="countdown-label">Days</span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-number" id="hours">00</span>
+          <span class="countdown-label">Hours</span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-number" id="minutes">00</span>
+          <span class="countdown-label">Minutes</span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-number" id="seconds">00</span>
+          <span class="countdown-label">Seconds</span>
+        </div>
+      </div>
+    </section>
+    
+    <section id="diary">
+      <h2>Our Memory Diary</h2>
+      <div class="diary-entries" id="diaryEntries">
+        <div class="spinner" id="diarySpinner"></div>
+      </div>
+      <div class="diary-form">
+        <div class="form-header">
+          <h3>Add a New Memory</h3>
+          <span class="char-count" id="diaryCharCount">0/500</span>
+        </div>
+        <textarea id="diaryText" placeholder="Write a new memory here..." maxlength="500"></textarea>
+        <button id="addEntry" disabled>Add Memory ✨</button>
+      </div>
+    </section>
+    
+    <section id="gallery">
+      <h2>Our Photo Gallery</h2>
+      
+      <div class="album-tabs" id="albumTabs">
+        <div class="album-tab active" data-album="all">All Photos</div>
+        <div class="album-tab" data-album="favorites">Favorites</div>
+      </div>
+      
+      <div class="photo-upload">
+        <h3>Add a New Photo</h3>
+        <div class="photo-upload-form">
+          <div class="preview-container">
+            <div class="upload-instructions">
+              <p>📷 Select an image to upload</p>
+              <p>Max size: 5MB</p>
+            </div>
+            <img id="imagePreview" src="" alt="Preview">
+          </div>
+          <div class="photo-upload-row">
+            <input type="file" id="photoInput" accept="image/*">
+          </div>
+          <div class="photo-upload-row">
+            <input type="text" id="captionInput" placeholder="Add a caption for this photo">
+            <button id="addPhoto" disabled>Add to Gallery 📸</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="gallery" id="photoGallery">
+        <div class="spinner" id="gallerySpinner"></div>
+      </div>
+    </section>
+    <section id="memoryMap" class="memory-map-section">
+      <div class="memory-map-container">
+        <h2 class="memory-map-title">Our Love Journey</h2>
+        <p class="memory-map-subtitle">Click on the hearts to revisit our special memories 💗</p>
+        <div id="map" class="memory-map" aria-label="Map showing special locations in our love story"></div>
+      </div>
+    </section>
+    
+    <script async
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNgHP4LCqfzTIubNte_PpaXXGNkso01Kw&callback=initMap">
+    </script>
+    
+    <script>
+      function initMap() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+          center: { lat: 53.56085, lng: -2.87446 },
+          zoom: 3,
+          styles: [
+            { featureType: "poi", stylers: [{ visibility: "off" }] },
+            { featureType: "transit", stylers: [{ visibility: "off" }] },
+            { featureType: "landscape", stylers: [{ saturation: -100, lightness: 60 }] },
+            { featureType: "road.highway", stylers: [{ saturation: -100 }] },
+            { featureType: "water", stylers: [{ saturation: -40, lightness: -20 }] }
+          ],
+          mapTypeControl: false,
+          streetViewControl: false,
+          fullscreenControl: true,
+          zoomControl: true
+        });
+    
+        const heartIcon = {
+          url: "data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff4081'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E",
+          scaledSize: new google.maps.Size(10, 10),
+          anchor: new google.maps.Point(16, 32)
+        };
+    
+        const memories = [
+          {
+            location: { lat: 53.56085, lng: -2.87446 },
+            title: "Where I First Saw You 💖",
+            date: "2023-09-13",
+            photo: "Photos/IMG_5168.jpeg"
+          },
+          {
+            location: { lat: 53.42148, lng: -2.72068 },
+            title: "First Photo On My New Phone ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-04-26",
+            photo: "Photos/IMG_0012.jpeg"
+          },
+          {
+            location: { lat: 53.55807, lng: -2.87009 },
+            title: "Making a Cheesecake ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2023-12-12",
+            photo: "Photos/IMG_0064.jpeg", 
+            photo2: "Photos/IMG_0065.jpeg", 
+            
+          },
+          {
+            location: { lat: 53.55807, lng: -2.87009 },
+            title: "Rey's Christmas Dinner ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2023-12-12",
+            photo: "Photos/IMG_0069.jpeg"
+          },
+          {
+            location: { lat: 53.55807, lng: -2.87009 },
+            title: "Christmas at uni before leaving for home ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2023-12-14",
+            photo: "Photos/IMG_0074.jpeg"
+          },
+          {
+            location: { lat: 53.57295, lng: -2.89030 },
+            title: "Toby Carvery ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-01-04",
+            photo: "Photos/IMG_0084.jpeg"
+          },
+          {
+            location: { lat: 53.42148, lng: -2.72068 },
+            title: "First Photo On My New Phone ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-04-26",
+            photo: "Photos/IMG_0012.jpeg"
+          },
+          {
+            location: { lat: 53.56146, lng: -2.87484 },
+            title: "Meeting the Cat ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-01-04",
+            photo: "Photos/IMG_0085.jpeg"
+          },
+          {
+            location: { lat: 53.55828, lng: -2.86984 },
+            title: "Skincare interuption ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-01-05",
+            photo: "Photos/IMG_0097.jpeg"
+          },
+          {
+            location: { lat: 53.55987, lng: -2.86496 },
+            title: "Walk in Ruff lane ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-01-06",
+            photo: "Photos/IMG_0107.jpeg",
+            photo2: "Photos/IMG_0119.jpeg",
+          },
+
+          {
+            location: { lat: 53.55932, lng: -2.87668 },
+            title: "Sleepy baba ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-01-07",
+            photo: "Photos/IMG_0124.jpeg"
+          },
+          {
+            location: { lat: 53.55822, lng: -2.87021 },
+            title: "Making French Toast ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-01-08",
+            photo: "Photos/IMG_0127.jpeg"
+          },
+          {
+            location: { lat: 53.55818, lng: -2.87025 },
+            title: "Making Corn Flake Chicken ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-01-08",
+            photo: "Photos/IMG_0142.jpeg"
+          },
+          {
+            location: { lat: 53.56406, lng: -2.94224 },
+            title: "Walking around Aughton ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-01-09",
+            photo: "Photos/IMG_0152.jpeg",
+            photo2: "Photos/IMG_0155.jpeg",
+            photo3: "Photos/IMG_0156.jpeg",
+            photo4: "Photos/IMG_0166.jpeg",
+          },
+
+          {
+            location: { lat: 53.55807, lng: -2.87014 },
+            title: "Making loom bands ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-01-17",
+            photo: "Photos/IMG_0203.jpeg"
+          },
+
+          {
+            location: { lat: 53.55808, lng: -2.87006 },
+            title: "Making Art ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-01-16",
+            photo: "Photos/IMG_0208.jpeg"
+          },
+
+          {
+            location: { lat: 53.55807, lng: -2.87009 },
+            title: "Pressing flowers ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-01-16",
+            photo: "Photos/IMG_0210.jpeg"
+          },
+
+          {
+            location: { lat: 53.55813, lng: -2.86980 },
+            title: "Making your mark ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-01-24",
+            photo: "Photos/IMG_0230.jpeg"
+          },
+
+          {
+            location: { lat: 53.16770, lng: -2.98526 },
+            title: "Staying at your nans ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-01-26",
+            photo: "Photos/IMG_0232.jpeg"
+          },
+          {
+            location: { lat: 53.19159, lng: -2.88430 },
+            title: "Trip to Chester Wetherspoons ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-01-26",
+            photo: "Photos/IMG_0257.jpeg"
+          },
+          {
+            location: { lat: 53.39380, lng: -2.97887 },
+            title: "Golf Fang Date ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-01-30",
+            photo: "Photos/IMG_0264.jpeg",
+            photo2: "Photos/IMG_0275.jpeg",
+            photo3: "Photos/IMG_0287.jpeg",
+          },
+          {
+            location: { lat: 53.40518, lng: -2.98069 },
+            title: "Lane 7 Bowling Date ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-02-06",
+            photo: "Photos/IMG_0294.jpeg",
+            photo2: "Photos/IMG_0297.jpeg",
+          },
+          {
+            location: { lat: 53.19004, lng: -2.89371 },
+            title: "Valentines Day Date ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-02-13",
+            photo: "Photos/IMG_0303.jpeg",
+            photo2: "Photos/IMG_0307.jpeg",
+            photo3: "Photos/IMG_0312.jpeg",
+            photo4: "Photos/IMG_8302.jpeg",
+          },
+          {
+            location: { lat: 53.18978, lng: -2.89371 },
+            title: "Cafe Date ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-02-14",
+            photo: "Photos/IMG_0315.jpeg"
+          },
+          {
+            location: { lat: 53.40828, lng: -2.98478 },
+            title: "First time at kaspas ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-02-27",
+            photo: "Photos/IMG_0325.jpeg"
+          },
+          {
+            location: { lat: 53.55805, lng: -2.87012 },
+            title: "I Finally get some nice clothes ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-02-27",
+            photo: "Photos/IMG_0329.jpeg"
+          },
+          {
+            location: { lat: 53.26684, lng: -2.88017 },
+            title: "First Visit to Cheshire Oaks ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-02-29",
+            photo: "Photos/IMG_0340.jpeg",
+            photo2: "Photos/IMG_0340.jpeg"
+          },
+          {
+            location: { lat: 53.26409, lng: -2.88892 },
+            title: "Bowling Date in Cheshire Oaks ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-02-29",
+            photo: "Photos/IMG_0342.jpeg"
+          },
+          {
+            location: { lat: 53.55804, lng: -2.87022 },
+            title: "My own subway assistant ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-03-04",
+            photo: "Photos/IMG_0351.jpeg"
+          },
+          {
+            location: { lat: 53.40446, lng: -2.98112 },
+            title: "First visit to the cat cafe ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-03-07",
+            photo: "Photos/IMG_0372.jpeg"
+          },
+          {
+            location: { lat: 55.00083, lng: -3.06363 },
+            title: "Natalie's Wedding ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-04-02",
+            photo: "Photos/IMG_0396.jpeg",
+            photo2: "Photos/IMG_0398.jpeg",
+          },
+          {
+            location: { lat: 53.00083, lng: -3.06363 },
+            title: "Bowling ... Again ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-04-16",
+            photo: "Photos/IMG_0596.jpeg",
+            photo2: "Photos/IMG_0603.jpeg",
+          },
+          {
+            location: { lat: 53.40454, lng: -2.98006 },
+            title: "First Cinnabon ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-04-19",
+            photos: "Photos/IMG_0633.jpeg", 
+            
+          },
+
+          {
+            location: { lat: 53.55816, lng: -2.86977 },
+            title: "Your Leaving Day :( ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-05-23",
+            photos: "Photos/IMG_3279.jpeg", 
+            photos2: "Photos/IMG_3283.jpeg",
+            
+          },
+
+          {
+            location: { lat: 53.40529, lng: -2.98540 },
+            title: "First K-Dog ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-05-27",
+            photos: "Photos/IMG_3628.jpeg",
+            photos2: "Photos/IMG_3629.jpeg", 
+          },
+
+          {
+            location: { lat: 53.19698, lng: -2.91000 },
+            title: "Bowling with your family ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-05-31",
+            photos: "Photos/IMG_3743.jpeg", 
+            photos2: "Photos/IMG_3744.jpeg",
+            photos3: "Photos/IMG_3795.jpeg",
+          },
+          {
+            location: { lat: 53.40508, lng: -2.98483 },
+            title: "Bowling Date - Roxy Bowling ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-06-04",
+            photos: "Photos/IMG_3958.jpeg", 
+            photos2: "Photos/IMG_4011.jpeg",
+            photos3: "Photos/IMG_4237.jpeg",
+            
+          },
+          {
+            location: { lat: 53.16554, lng: -3.06444 },
+            title: "Bingo With Your Nan ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-06-06",
+            photos: "Photos/IMG_4250.jpeg",
+            photos2: "Photos/IMG_4251.jpeg", 
+          },
+
+          {
+            location: { lat: 53.47605, lng: -2.23691 },
+            title: "Manchester Date ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-06-10",
+            photos: "Photos/IMG_4332.jpeg", 
+            photos2: "Photos/IMG_4435.jpeg",
+            photos3: "Photos/IMG_4777.jpeg",
+            photos4: "Photos/IMG_4746.jpeg",
+          },
+          {
+            location: { lat: 53.48583, lng: -2.23974 },
+            title: "Bowling - Manchester ten pin ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-06-18",
+            photos: "Photos/IMG_5133.jpeg",
+            photos2: "Photos/IMG_5152.jpeg", 
+          },
+          {
+            location: { lat: 53.42156, lng: -2.72082 },
+            title: "Sushi Roll Amiee ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-06-25",
+            photos: "Photos/IMG_5299.jpeg",
+          },
+          {
+            location: { lat: 53.39529, lng: -2.98925 },
+            title: "Vincent Van Gough Date",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-07-02",
+            photos: "Photos/IMG_5834.jpeg",
+            photos2: "Photos/IMG_5898.jpeg",
+            photos3: "Photos/IMG_7707.jpeg", 
+            
+          },
+
+          {
+            location: { lat: 53.19002, lng: -2.89388 },
+            title: "Chester Night Out ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-07-07",
+            photos: "Photos/IMG_7833.jpeg", 
+            photos2: "Photos/IMG_7834.jpeg",
+          },
+          {
+            location: { lat: 53.19002, lng: -2.89388 },
+            title: "Aftermath ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-07-07", 
+            photo: "Photos/IMG_7834.jpeg",
+          },
+          {
+            location: { lat: 53.40938, lng: -2.72205 },
+            title: "Walkies ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-07-20",
+            photos: "Photos/IMG_7988.jpeg", 
+            
+          },
+          {
+            location: { lat: 53.20521, lng: -3.05753 },
+            title: "Wepre Park Walk ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-07-24",
+            photos: "Photos/IMG_8260.jpeg", 
+            
+          },
+          {
+            location: { lat: 3957556, lng: 3.37866},
+            title: "Majorca Holiday ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-09-13",
+            photos: "Photos/IMG_9579.jpeg", 
+            photos2: "Photos/IMG_9701.jpeg",
+            photos3: "Photos/IMG_0956.jpeg",
+          },
+          {
+            location: { lat: 53.54341, lng: -2.95815 },
+            title: "Pumpkin Picking ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-10-21",
+            photos: "Photos/IMG_2075.jpeg", 
+            
+          },
+
+          {
+            location: { lat: 53.56028, lng: -2.87702 },
+            title: "First Halloween together ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-10-31",
+            photos: "Photos/IMG_2262.jpeg",
+            photos2: "Photos/IMG_2254.jpeg",
+            photos3: "Photos/IMG_3302.jpeg",
+            
+          },
+
+          {
+            location: {  },
+            title: "Your Birthday (at uni) ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-12-03",
+            photos: "Photos/IMG_2762.jpeg", 
+            
+          },
+          {
+            location: { lat: 53.16765, lng: -2.98549 },
+            title: "Your Birthday Party ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2024-11-29",
+            photos: "Photos/IMG_5086.jpeg", 
+            
+          },
+
+          {
+            location: { lat: 53.56026, lng: -2.87621 },
+            title: "Asking you to be my valentine ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2025-02-04",
+            photos: "Photos/IMG_3868.jpeg", 
+            
+          },
+          {
+            location: { lat: 53.46774, lng: -2.34082 },
+            title: "Second aquarium date ",
+            description: "March 2021 — Our amazing LA adventure! We visited Hollywood, the beaches, and made so many memories.",
+            date: "2025-03-05",
+            photos: "Photos/IMG_4480.jpeg", 
+            
+          },
+          {
+            location: { lat: 53.56704, lng: -2.88432 },
+            title: "Ormskirk Date",
+      
+            date: "2025-04-02",
+            photos: "Photos/IMG_4813.jpeg",
+            photos2: "Photos/IMG_4841.jpeg",
+            photos3: "Photos/IMG_5064.jpeg", 
+            
+          },
+        ];
+    
+        // Sort memories by date
+        memories.sort((a, b) => new Date(a.date) - new Date(b.date));
+        const infoWindows = [];
+        const markers = [];
+    
+        // Function to smoothly pan and zoom the map
+        function flyTo(map, targetPos, targetZoom) {
+          const currentZoom = map.getZoom();
+          const currentCenter = map.getCenter();
+          
+          // Only animate if the distance isn't too large
+          const distance = google.maps.geometry.spherical.computeDistanceBetween(currentCenter, targetPos);
+          if (distance > 1000000) { // If more than 1000km, just jump
+            map.setCenter(targetPos);
+            map.setZoom(targetZoom);
+            return;
+          }
+          
+          // Calculate steps for animation
+          const steps = 50;
+          const zoomStep = (targetZoom - currentZoom) / steps;
+          const latStep = (targetPos.lat() - currentCenter.lat()) / steps;
+          const lngStep = (targetPos.lng() - currentCenter.lng()) / steps;
+          
+          let step = 0;
+          const animate = () => {
+            if (step >= steps) {
+              map.setCenter(targetPos);
+              map.setZoom(targetZoom);
+              return;
+            }
+            
+            const newZoom = currentZoom + (zoomStep * step);
+            const newLat = currentCenter.lat() + (latStep * step);
+            const newLng = currentCenter.lng() + (lngStep * step);
+            
+            map.setCenter({ lat: newLat, lng: newLng });
+            map.setZoom(newZoom);
+            
+            step++;
+            requestAnimationFrame(animate);
+          };
+          
+          animate();
+        }
+    
+        memories.forEach((memory, index) => {
+          const marker = new google.maps.Marker({
+            position: memory.location,
+            map,
+            title: memory.title,
+            icon: heartIcon,
+            animation: google.maps.Animation.DROP
+          });
+    
+          markers.push(marker);
+    
+          const imagesHtml = Object.keys(memory)
+            .filter(key => key.startsWith('photo'))
+            .map((key, i) => `
+              <div class="swiper-slide">
+                <img src="${memory[key]}" alt="${memory.title} - ${i + 1}" class="memory-photo">
+              </div>
+            `).join('');
+    
+          const infoWindow = new google.maps.InfoWindow({
+            content: `
+              <div class="memory-info-window">
+                <h4>${memory.title}</h4>
+                <p class="memory-date">${memory.date}</p>
+                ${imagesHtml ? `
+                  <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                      ${imagesHtml}
+                    </div>
+                    <div class="swiper-pagination"></div>
+                  </div>
+                ` : ''}
+                
+                ${index < memories.length - 1 ? `
+                  <div class="memory-next" role="button" tabindex="0" data-next-index="${index + 1}">
+                    Next Memory →
+                  </div>` : ''}
+              </div>
+            `
+          });
+    
+          marker.addListener("click", () => {
+            // Close all other info windows
+            infoWindows.forEach(iw => iw.close());
+            
+            // Open this info window
+            infoWindow.open(map, marker);
+            
+            // Smoothly fly to this marker
+            flyTo(map, marker.getPosition(), 15);
+            
+            // Initialize swiper if needed
+            setTimeout(() => {
+              if (document.querySelector('.swiper-container')) {
+                new Swiper('.swiper-container', {
+                  pagination: { el: '.swiper-pagination' },
+                  loop: true
+                });
+              }
+              
+              // Add click handler for next button
+              const nextButton = document.querySelector('.memory-next');
+              if (nextButton) {
+                nextButton.onclick = () => {
+                  const nextIndex = parseInt(nextButton.getAttribute('data-next-index'));
+                  google.maps.event.trigger(markers[nextIndex], 'click');
+                };
+              }
+            }, 300);
+            
+            infoWindows[index] = infoWindow;
+          });
+    
+          if (index === 0) {
+            setTimeout(() => {
+              google.maps.event.trigger(marker, 'click');
+            }, 800);
+          }
+        });
+    
+        // Make markers accessible globally
+        window.memoryMarkers = markers;
+      }
+    </script>
+    
+    <!-- Add the geometry library to your Google Maps script -->
+    <script async
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNgHP4LCqfzTIubNte_PpaXXGNkso01Kw&libraries=geometry&callback=initMap">
+    </script>
+    
+    <!-- Include Swiper.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    
+    <style>
+      .memory-map-section {
+        padding: 3rem 1rem;
+        background: #fff9fb;
+        text-align: center;
+      }
+    
+      .memory-map-container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+    
+      .memory-map-title {
+        font-size: 2.5rem;
+        color: #ff4081;
+        margin-bottom: 0.5rem;
+        font-weight: 700;
+      }
+    
+      .memory-map-subtitle {
+        color: #666;
+        margin-bottom: 1.5rem;
+        font-style: italic;
+        font-size: 1rem;
+      }
+    
+      .memory-map {
+        height: 500px;
+        border-radius: 20px;
+        box-shadow: 0 6px 20px rgba(255, 64, 129, 0.1);
+        border: 1px solid #f7cfe0;
+      }
+    
+      .memory-info-window {
+        font-family: 'Segoe UI', sans-serif;
+        padding: 1rem;
+        max-width: 260px;
+      }
+    
+      .memory-info-window h4 {
+        margin: 0 0 0.4rem 0;
+        color: #ff4081;
+        font-size: 1.1rem;
+      }
+    
+      .memory-date {
+        font-size: 0.85rem;
+        color: #999;
+        margin-bottom: 0.5rem;
+      }
+    
+      .swiper-container {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        overflow: hidden;
+        margin: 0.5rem 0;
+      }
+    
+      .swiper-slide img {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+    
+      
+    
+      .memory-next {
+        margin-top: 0.6rem;
+        padding: 0.4rem 0;
+        color: #ff4081;
+        cursor: pointer;
+        text-align: right;
+        font-size: 0.9rem;
+        transition: color 0.2s ease;
+      }
+    
+      .memory-next:hover,
+      .memory-next:focus {
+        text-decoration: underline;
+        color: #e91e63;
+        outline: none;
+      }
+    </style>
+    
+    
+      
+    
+    <div class="modal" id="imageModal">
+      <span class="close-modal" id="closeModal">&times;</span>
+      <img class="modal-content" id="modalImage">
+    </div>
+
+    <!-- Confirmation Dialog -->
+    <div class="confirmation-dialog" id="confirmationDialog">
+      <div class="dialog-content">
+        <h3 id="dialogMessage">Are you sure you want to delete this?</h3>
+        <div class="dialog-buttons">
+          <button class="dialog-btn dialog-btn-cancel" id="dialogCancel">Cancel</button>
+          <button class="dialog-btn dialog-btn-confirm" id="dialogConfirm">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+    
+    <footer>
+      <p>Created with love <span class="heart">❤️</span> for the most special person in my life</p>
+    </footer>
+  </div>
+
+  <script>
+    // Create floating hearts background
+    function createHearts() {
+      const heartsBg = document.getElementById('heartsBackground');
+      const heartCount = 15;
+      
+      for (let i = 0; i < heartCount; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart-bg';
+        heart.innerHTML = '❤️';
+        heart.style.left = `${Math.random() * 100}%`;
+        heart.style.animationDuration = `${15 + Math.random() * 20}s`;
+        heart.style.animationDelay = `${Math.random() * 10}s`;
+        heart.style.fontSize = `${15 + Math.random() * 15}px`;
+        heartsBg.appendChild(heart);
+      }
+    }
+    
+    // Set up the countdown target date - MODIFY THIS TO YOUR ANNIVERSARY DATE
+    const targetDate = new Date("2025-04-20T00:00:00").getTime();
+    
+    // Set up first met date - MODIFY THIS TO WHEN YOU FIRST MET
+    const firstMetDate = new Date("2023-10-13T00:00:00");
+    
+    // Update the countdown every second
+    const countdownInterval = setInterval(function() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+      
+      // Calculate time components
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      // Display the countdown
+      document.getElementById("days").textContent = days.toString().padStart(2, "0");
+      document.getElementById("hours").textContent = hours.toString().padStart(2, "0");
+      document.getElementById("minutes").textContent = minutes.toString().padStart(2, "0");
+      document.getElementById("seconds").textContent = seconds.toString().padStart(2, "0");
+      
+      // If the countdown is over
+      if (distance < 0) {
+        clearInterval(countdownInterval);
+        document.getElementById("countdown").innerHTML = "<h2>Happy Anniversary! 🎉</h2>";
+      }
+    }, 1000);
+    
+    // Calculate days since first met
+    function updateFirstMetInfo() {
+      const now = new Date();
+      const diffTime = Math.abs(now - firstMetDate);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      
+      document.getElementById('firstMetDate').textContent = firstMetDate.toLocaleDateString('en-US', {
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric'
+      });
+      
+      document.getElementById('daysTogether').textContent = `${diffDays} days together`;
+      
+      // Update relationship progress (just for fun)
+      const progressPercent = Math.min(100, Math.floor(diffDays / 365 * 100));
+      document.getElementById('progressPercent').textContent = `${progressPercent}%`;
+      document.getElementById('progressFill').style.width = `${progressPercent}%`;
+    }
+    
+    // Diary functionality
+    const diaryEntries = JSON.parse(localStorage.getItem('diaryEntries')) || [];
+    const diaryContainer = document.getElementById('diaryEntries');
+    const diaryText = document.getElementById('diaryText');
+    const addEntryBtn = document.getElementById('addEntry');
+    const diaryCharCount = document.getElementById('diaryCharCount');
+    const diarySpinner = document.getElementById('diarySpinner');
+    
+    // Display existing diary entries
+    function displayEntries() {
+      diarySpinner.style.display = 'block';
+      diaryContainer.innerHTML = '';
+      
+      setTimeout(() => {
+        if (diaryEntries.length === 0) {
+          const emptyMessage = document.createElement('p');
+          emptyMessage.textContent = 'No memories yet. Add your first one! 💝';
+          emptyMessage.style.textAlign = 'center';
+          emptyMessage.style.fontStyle = 'italic';
+          emptyMessage.style.color = '#8e5e76';
+          emptyMessage.style.padding = '30px 0';
+          diaryContainer.appendChild(emptyMessage);
+          diarySpinner.style.display = 'none';
+          return;
+        }
+        
+        // Sort entries by date (newest first)
+        diaryEntries.sort((a, b) => new Date(b.date) - new Date(a.date));
+        
+        diaryEntries.forEach((entry, index) => {
+          const entryElement = document.createElement('div');
+          entryElement.className = `diary-entry ${entry.favorite ? 'favorite' : ''}`;
+          
+          const dateElement = document.createElement('div');
+          dateElement.className = 'entry-date';
+          dateElement.textContent = new Date(entry.date).toLocaleString();
+          
+          // Add actions (favorite and delete)
+          const actionsElement = document.createElement('div');
+          actionsElement.className = 'entry-actions';
+          
+          const favoriteBtn = document.createElement('button');
+          favoriteBtn.className = `entry-action favorite-btn ${entry.favorite ? 'active' : ''}`;
+          favoriteBtn.innerHTML = entry.favorite ? '★' : '☆';
+          favoriteBtn.title = entry.favorite ? 'Remove from favorites' : 'Add to favorites';
+          favoriteBtn.addEventListener('click', () => toggleFavorite(index));
+          
+          const deleteBtn = document.createElement('button');
+          deleteBtn.className = 'entry-action delete-btn';
+          deleteBtn.innerHTML = '🗑️';
+          deleteBtn.title = 'Delete this memory';
+          deleteBtn.addEventListener('click', () => confirmDelete('diary', index));
+          
+          actionsElement.appendChild(favoriteBtn);
+          actionsElement.appendChild(deleteBtn);
+          dateElement.appendChild(actionsElement);
+          
+          const textElement = document.createElement('div');
+          textElement.className = 'entry-text';
+          textElement.textContent = entry.text;
+          
+          entryElement.appendChild(dateElement);
+          entryElement.appendChild(textElement);
+          diaryContainer.appendChild(entryElement);
+        });
+        
+        diarySpinner.style.display = 'none';
+      }, 500); // Simulate loading delay
+    }
+    
+    // Toggle favorite status of a diary entry
+    function toggleFavorite(index) {
+      diaryEntries[index].favorite = !diaryEntries[index].favorite;
+      localStorage.setItem('diaryEntries', JSON.stringify(diaryEntries));
+      displayEntries();
+      displayPhotos();
+      
+      showToast(diaryEntries[index].favorite 
+        ? 'Added to favorites 💛' 
+        : 'Removed from favorites');
+    }
+    
+    // Add new diary entry
+    addEntryBtn.addEventListener('click', () => {
+      const text = diaryText.value.trim();
+      
+      if (text) {
+        const newEntry = {
+          date: new Date().toISOString(),
+          text: text,
+          favorite: false
+        };
+        
+        diaryEntries.push(newEntry);
+        localStorage.setItem('diaryEntries', JSON.stringify(diaryEntries));
+        
+        diaryText.value = '';
+        diaryCharCount.textContent = '0/500';
+        addEntryBtn.disabled = true;
+        
+        showToast('Memory added successfully ✨');
+        displayEntries();
+      }
+    });
+    
+    // Character count for diary text
+    diaryText.addEventListener('input', function() {
+      const length = this.value.length;
+      diaryCharCount.textContent = `${length}/500`;
+      
+      if (length > 450) {
+        diaryCharCount.classList.add('warning');
+      } else {
+        diaryCharCount.classList.remove('warning');
+      }
+      
+      addEntryBtn.disabled = length < 5 || length > 500;
+    });
+    
+    // Photo gallery functionality
+    const photos = JSON.parse(localStorage.getItem('galleryPhotos')) || [];
+    const currentAlbum = 'all';
+    
+    const galleryContainer = document.getElementById('photoGallery');
+    const photoInput = document.getElementById('photoInput');
+    const captionInput = document.getElementById('captionInput');
+    const addPhotoBtn = document.getElementById('addPhoto');
+    const imagePreview = document.getElementById('imagePreview');
+    const albumTabs = document.getElementById('albumTabs');
+    const gallerySpinner = document.getElementById('gallerySpinner');
+    
+    // Display photos in gallery
+    function displayPhotos(album = 'all') {
+      gallerySpinner.style.display = 'block';
+      galleryContainer.innerHTML = '';
+      
+      setTimeout(() => {
+        const photosToDisplay = album === 'favorites' 
+          ? photos.filter(photo => photo.favorite)
+          : photos;
+        
+        if (photosToDisplay.length === 0) {
+          const emptyMessage = document.createElement('p');
+          emptyMessage.textContent = album === 'favorites' 
+            ? 'No favorite photos yet. Mark some as favorites! ⭐' 
+            : 'No photos yet. Add your first one! 📷';
+          emptyMessage.style.textAlign = 'center';
+          emptyMessage.style.fontStyle = 'italic';
+          emptyMessage.style.color = '#8e5e76';
+          emptyMessage.style.padding = '30px 0';
+          galleryContainer.appendChild(emptyMessage);
+          gallerySpinner.style.display = 'none';
+          return;
+        }
+        
+        photosToDisplay.forEach((photo, index) => {
+          const photoElement = document.createElement('div');
+          photoElement.className = `gallery-item ${photo.favorite ? 'favorite' : ''}`;
+          
+          const img = document.createElement('img');
+          img.src = photo.src;
+          img.alt = photo.caption || 'Gallery photo';
+          img.dataset.index = index;
+          
+          const caption = document.createElement('div');
+          caption.className = 'gallery-caption';
+          caption.textContent = photo.caption || '';
+          
+          // Add actions (favorite and delete)
+          const actions = document.createElement('div');
+          actions.className = 'gallery-actions';
+          
+          const favoriteBtn = document.createElement('button');
+          favoriteBtn.className = `gallery-action favorite-star ${photo.favorite ? 'active' : ''}`;
+          favoriteBtn.innerHTML = '⭐';
+          favoriteBtn.title = photo.favorite ? 'Remove from favorites' : 'Add to favorites';
+          favoriteBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            togglePhotoFavorite(index);
+          });
+          
+          const deleteBtn = document.createElement('button');
+          deleteBtn.className = 'gallery-action';
+          deleteBtn.innerHTML = '🗑️';
+          deleteBtn.title = 'Delete this photo';
+          deleteBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            confirmDelete('photo', index);
+          });
+          
+          actions.appendChild(favoriteBtn);
+          actions.appendChild(deleteBtn);
+          
+          photoElement.appendChild(img);
+          photoElement.appendChild(caption);
+          photoElement.appendChild(actions);
+          galleryContainer.appendChild(photoElement);
+          
+          // Add click event for modal
+          img.addEventListener('click', function() {
+            showModal(this.src);
+          });
+        });
+        
+        gallerySpinner.style.display = 'none';
+      }, 500); // Simulate loading delay
+    }
+    
+    // Toggle favorite status of a photo
+    function togglePhotoFavorite(index) {
+      photos[index].favorite = !photos[index].favorite;
+      localStorage.setItem('galleryPhotos', JSON.stringify(photos));
+      displayPhotos(currentAlbum);
+      
+      showToast(photos[index].favorite 
+        ? 'Photo added to favorites ⭐' 
+        : 'Photo removed from favorites');
+    }
+    
+    // Preview selected image
+    photoInput.addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      
+      if (file) {
+        // Check file size (max 5MB)
+        if (file.size > 5 * 1024 * 1024) {
+          showToast('Image size too large (max 5MB)');
+          this.value = '';
+          return;
+        }
+        
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+          imagePreview.style.display = 'block';
+          imagePreview.src = e.target.result;
+          document.querySelector('.upload-instructions').style.display = 'none';
+          
+          // Enable add button if caption is not empty
+          addPhotoBtn.disabled = captionInput.value.trim() === '';
+        };
+        
+        reader.readAsDataURL(file);
+      }
+    });
+    
+    // Enable add photo button when caption is entered
+    captionInput.addEventListener('input', function() {
+      addPhotoBtn.disabled = !photoInput.files[0] || this.value.trim() === '';
+    });
+    
+    // Add new photo to gallery
+    addPhotoBtn.addEventListener('click', function() {
+      const file = photoInput.files[0];
+      const caption = captionInput.value.trim();
+      
+      if (file) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+          const newPhoto = {
+            src: e.target.result,
+            caption: caption,
+            favorite: false,
+            date: new Date().toISOString()
+          };
+          
+          photos.push(newPhoto);
+          localStorage.setItem('galleryPhotos', JSON.stringify(photos));
+          
+          // Reset form
+          photoInput.value = '';
+          captionInput.value = '';
+          imagePreview.style.display = 'none';
+          document.querySelector('.upload-instructions').style.display = 'block';
+          addPhotoBtn.disabled = true;
+          
+          showToast('Photo added to gallery 📷');
+          displayPhotos(currentAlbum);
+        };
+        
+        reader.readAsDataURL(file);
+      }
+    });
+    
+    // Album tab functionality
+    albumTabs.addEventListener('click', function(e) {
+      if (e.target.classList.contains('album-tab')) {
+        // Update active tab
+        document.querySelectorAll('.album-tab').forEach(tab => {
+          tab.classList.remove('active');
+        });
+        e.target.classList.add('active');
+        
+        // Display photos for selected album
+        const album = e.target.dataset.album;
+        displayPhotos(album);
+      }
+    });
+    
+    // Modal functionality
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const closeModal = document.getElementById('closeModal');
+    
+    function showModal(src) {
+      modal.style.display = 'flex';
+      setTimeout(() => {
+        modal.classList.add('show');
+      }, 10);
+      modalImg.src = src;
+    }
+    
+    closeModal.addEventListener('click', function() {
+      modal.classList.remove('show');
+      setTimeout(() => {
+        modal.style.display = 'none';
+      }, 300);
+    });
+    
+    window.addEventListener('click', function(event) {
+      if (event.target === modal) {
+        modal.classList.remove('show');
+        setTimeout(() => {
+          modal.style.display = 'none';
+        }, 300);
+      }
+    });
+    
+    // Confirmation dialog functionality
+    const confirmationDialog = document.getElementById('confirmationDialog');
+    const dialogMessage = document.getElementById('dialogMessage');
+    const dialogCancel = document.getElementById('dialogCancel');
+    const dialogConfirm = document.getElementById('dialogConfirm');
+    
+    let currentDeleteType = '';
+    let currentDeleteIndex = -1;
+    
+    function confirmDelete(type, index) {
+      currentDeleteType = type;
+      currentDeleteIndex = index;
+      
+      dialogMessage.textContent = type === 'diary' 
+        ? 'Are you sure you want to delete this memory?' 
+        : 'Are you sure you want to delete this photo?';
+      
+      confirmationDialog.style.display = 'flex';
+    }
+    
+    dialogCancel.addEventListener('click', function() {
+      confirmationDialog.style.display = 'none';
+    });
+    
+    dialogConfirm.addEventListener('click', function() {
+      if (currentDeleteType === 'diary') {
+        diaryEntries.splice(currentDeleteIndex, 1);
+        localStorage.setItem('diaryEntries', JSON.stringify(diaryEntries));
+        displayEntries();
+        showToast('Memory deleted');
+      } else if (currentDeleteType === 'photo') {
+        photos.splice(currentDeleteIndex, 1);
+        localStorage.setItem('galleryPhotos', JSON.stringify(photos));
+        displayPhotos(currentAlbum);
+        showToast('Photo deleted');
+      }
+      
+      confirmationDialog.style.display = 'none';
+    });
+    
+    // Toast notification functionality
+    const toast = document.getElementById('toast');
+    
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+    
+    // Add Enter key functionality for the diary form
+    diaryText.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter' && event.ctrlKey) {
+        addEntryBtn.click();
+      }
+    });
+    
+    // Add Enter key functionality for the photo caption
+    captionInput.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        addPhotoBtn.click();
+      }
+    });
+    
+    // Initialize the page
+    function init() {
+      createHearts();
+      updateFirstMetInfo();
+      displayEntries();
+      displayPhotos();
+    }
+    
+    // Run initialization when DOM is loaded
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

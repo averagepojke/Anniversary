@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Top Secret Love Vault</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap');
+    
+    :root {
+      --primary-color: #ff6b88;
+      --primary-light: #ffcad4;
+      --primary-dark: #e05070;
+      --accent-color: #8C52FF;
+      --accent-light: #a57aff;
+      --white: #ffffff;
+      --text-dark: #333333;
+      --background: #fff5f7;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: radial-gradient(circle at center, var(--primary-light) 0%, var(--background) 70%);
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+      color: var(--text-dark);
+    }
+    
+    .login-container {
+      background-color: var(--white);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(255, 107, 136, 0.3);
+      text-align: center;
+      max-width: 500px;
+      width: 90%;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+    }
+    
+    .login-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(255, 107, 136, 0.4);
+    }
+    
+    h1 {
+      color: var(--primary-color);
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(255, 107, 136, 0.2);
+    }
+    
+    .subtitle {
+      color: var(--text-dark);
+      margin-bottom: 30px;
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+    
+    .button {
+      background: linear-gradient(to right, var(--primary-color), #ff4785);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(255, 107, 136, 0.3);
+    }
+    
+    .button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(212, 77, 110, 0.4);
+    }
+    
+    .button:active {
+      transform: translateY(-1px);
+    }
+    
+    .verify-button {
+      margin-top: 20px;
+    }
+    
+    .button::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+      transition: transform 0.5s, opacity 0.5s;
+    }
+    
+    .button:hover::after {
+      transform: translate(-50%, -50%) scale(2);
+      opacity: 1;
+    }
+    
+    .hearts {
+      position: absolute;
+      font-size: 20px;
+      color: rgba(255, 107, 136, 0.3);
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .success-screen {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.95);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      z-index: 10;
+    }
+    
+    .success-message {
+      color: var(--primary-color);
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      font-family: 'Dancing Script', cursive;
+    }
+    
+    .loader {
+      width: 60px;
+      height: 60px;
+      border: 5px solid var(--primary-light);
+      border-top: 5px solid var(--primary-color);
+      border-radius: 50%;
+      animation: spin 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+      margin-bottom: 25px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .floating-hearts {
+      position: absolute;
+      animation: float 4s linear infinite;
+      opacity: 0;
+      z-index: 5;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-120px) rotate(360deg); opacity: 0; }
+    }
+    
+    /* Scanner related styles */
+    .scanner-container {
+      margin: 20px auto;
+      text-align: center;
+    }
+    
+    .scanner {
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffecf1 0%, #ffd6e0 100%);
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(255, 107, 136, 0.3);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 3px solid transparent;
+    }
+    
+    .scanner:hover {
+      transform: scale(1.05) translateY(-5px);
+      box-shadow: 0 15px 30px rgba(255, 107, 136, 0.4);
+      border-color: rgba(255, 107, 136, 0.3);
+    }
+    
+    .scanner-icon {
+      font-size: 60px;
+      transition: all 0.5s ease;
+    }
+    
+    .scanner:hover .scanner-icon {
+      transform: scale(1.1);
+    }
+    
+    .scan-effect {
+      position: absolute;
+      top: -100%;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: linear-gradient(to right, 
+        rgba(255, 107, 136, 0), 
+        rgba(255, 107, 136, 0.8) 50%, 
+        rgba(255, 107, 136, 0));
+      box-shadow: 0 0 10px rgba(255, 107, 136, 0.6);
+      animation: scan 2.5s ease-in-out infinite;
+      opacity: 0;
+      z-index: 2;
+    }
+    
+    @keyframes scan {
+      0% { top: -10px; opacity: 0.7; }
+      50% { top: 180px; opacity: 0.9; }
+      100% { top: -10px; opacity: 0.7; }
+    }
+    
+    .scanner-ripple {
+      position: absolute;
+      border: 2px solid var(--primary-color);
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      opacity: 0;
+      animation: ripple 2s cubic-bezier(0,0,.2,1) infinite;
+    }
+    
+    @keyframes ripple {
+      0% { transform: scale(0.8); opacity: 0.8; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+    
+    .scanner-text {
+      color: var(--primary-color);
+      font-weight: 500;
+      margin-top: 15px;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+
+    .scanner:hover + .scanner-text {
+      color: var(--primary-dark);
+      transform: translateY(2px);
+    }
+
+    .greeting-message {
+      display: none;
+      margin: 25px 0;
+      padding: 20px;
+      background-color: #fff9fb;
+      border-radius: 15px;
+      border: 2px dashed var(--primary-light);
+      font-size: 1.1rem;
+      color: var(--text-dark);
+      animation: fadeInUp 1s ease;
+      box-shadow: 0 5px 15px rgba(255, 107, 136, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .greeting-message:hover {
+      border-color: var(--primary-color);
+      box-shadow: 0 8px 20px rgba(255, 107, 136, 0.2);
+    }
+    
+    @keyframes fadeInUp {
+      from { 
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .continue-button {
+      background: linear-gradient(to right, var(--accent-color), #5CE1E6);
+      color: white;
+      border: none;
+      padding: 12px 35px;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+      display: none;
+      animation: fadeInUp 1s ease 0.3s forwards;
+      opacity: 0;
+      box-shadow: 0 8px 20px rgba(140, 82, 255, 0.3);
+    }
+    
+    .continue-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(140, 82, 255, 0.4);
+      background: linear-gradient(to right, #9968FF, #6FEAEF);
+    }
+    
+    .continue-button:active {
+      transform: translateY(-1px);
+      box-shadow: 0 5px 15px rgba(140, 82, 255, 0.4);
+    }
+    
+    /* Background elements */
+    .background-heart {
+      position: fixed;
+      font-size: 150px;
+      color: rgba(255, 107, 136, 0.05);
+      z-index: -1;
+      pointer-events: none;
+      animation: pulse 4s ease infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 576px) {
+      .login-container {
+        padding: 30px 20px;
+        width: 95%;
+      }
+      
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      .scanner {
+        width: 140px;
+        height: 140px;
+      }
+      
+      .scanner-icon {
+        font-size: 45px;
+      }
+      
+      .greeting-message {
+        font-size: 1rem;
+        padding: 15px;
+      }
+      
+      .continue-button, .button {
+        padding: 10px 25px;
+        font-size: 0.95rem;
+      }
+    }
+    
+    /* Accessibility focus styles */
+    button:focus, .scanner:focus {
+      outline: 3px solid rgba(140, 82, 255, 0.5);
+      outline-offset: 3px;
+    }
+    
+    /* Loading dots animation for success screen */
+    .loading-dots {
+      display: inline-block;
+      position: relative;
+      color: var(--primary-dark);
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+    
+    .loading-dots::after {
+      content: '...';
+      position: absolute;
+      left: 0;
+      animation: dots 1.5s infinite;
+      width: 0;
+      overflow: hidden;
+    }
+    
+    @keyframes dots {
+      0% { width: 0; }
+      25% { width: 3px; }
+      50% { width: 6px; }
+      75% { width: 9px; }
+      100% { width: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background hearts -->
+  <div class="background-heart" style="top: 10%; left: 5%;">❤</div>
+  <div class="background-heart" style="bottom: 15%; right: 8%;">❤</div>
+  <div class="background-heart" style="top: 40%; right: 20%;">❤</div>
+  
+  <div class="login-container">
+    <!-- Floating background hearts -->
+    <div class="hearts" style="top: 10%; left: 20%; animation: float 6s linear infinite;">❤️</div>
+    <div class="hearts" style="top: 70%; left: 80%; animation: float 8s linear infinite 2s;">❤️</div>
+    <div class="hearts" style="top: 30%; left: 50%; animation: float 7s linear infinite 1s;">❤️</div>
+    
+    <h1>Secret Love Portal</h1>
+    <p class="subtitle">Show your face to the scanner, cutie</p>
+    
+    <div class="scanner-container">
+      <div class="scanner" id="face-scanner" tabindex="0" role="button" aria-label="Face scanner, tap to activate">
+        <div class="scanner-ripple" id="scanner-ripple"></div>
+        <div class="scan-effect" id="scan-line"></div>
+        <div class="scanner-icon">👤</div>
+      </div>
+      <p class="scanner-text">Tap to scan</p>
+    </div>
+    
+    <div class="greeting-message" id="greeting">
+      Hey there, beautiful! Your face has been recognized and your heart signature confirmed. Welcome back to our special place! ❤️
+    </div>
+    
+    <button class="button continue-button" id="continue-btn">Enter Our World</button>
+    
+    <div class="success-screen" id="success-screen">
+      <div class="loader"></div>
+      <div class="success-message">Identity confirmed! Welcome home, my love ❤️</div>
+      <div class="loading-dots">Preparing your special space</div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const scanner = document.getElementById('face-scanner');
+      const scanLine = document.getElementById('scan-line');
+      const ripple = document.getElementById('scanner-ripple');
+      const greeting = document.getElementById('greeting');
+      const continueBtn = document.getElementById('continue-btn');
+      const successScreen = document.getElementById('success-screen');
+      
+      // Enable keyboard accessibility
+      scanner.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          startScan();
+          e.preventDefault();
+        }
+      });
+      
+      // Start scan when clicked
+      scanner.addEventListener('click', startScan);
+      
+      // Scan function
+      function startScan() {
+        // Show scan animation
+        scanLine.style.opacity = '1';
+        ripple.style.opacity = '1';
+        scanner.style.boxShadow = '0 0 30px rgba(255, 107, 136, 0.6)';
+        
+        // Disable scanner during the process
+        scanner.style.pointerEvents = 'none';
+        scanner.setAttribute('aria-disabled', 'true');
+        
+        // Play scan sound (optional)
+        const scanSound = new Audio();
+        scanSound.src = 'data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU'+'A'.repeat(100);
+        scanSound.volume = 0.2;
+        try {
+          scanSound.play().catch(() => {});
+        } catch(e) {}
+        
+        // After "scanning" completes
+        setTimeout(function() {
+          scanLine.style.opacity = '0';
+          ripple.style.opacity = '0';
+          scanner.style.backgroundColor = '#ffecf7';
+          scanner.style.boxShadow = '0 8px 25px rgba(255, 107, 136, 0.35)';
+          
+          // Heart animation within scanner
+          scanner.innerHTML = '<div class="scanner-icon">❤️</div>';
+          const scannerIcon = scanner.querySelector('.scanner-icon');
+          scannerIcon.style.animation = 'pulse 1.5s infinite';
+          
+          // Show greeting and continue button with delay for natural flow
+          setTimeout(() => {
+            greeting.style.display = 'block';
+            
+            setTimeout(() => {
+              continueBtn.style.display = 'inline-block';
+              
+              // Create celebration hearts
+              createHearts(15);
+            }, 800);
+          }, 300);
+        }, 2000);
+      }
+      
+      // Continue button shows success screen and redirects
+      continueBtn.addEventListener('click', function() {
+        // Show success screen with fade in
+        successScreen.style.display = 'flex';
+        successScreen.style.opacity = '0';
+        successScreen.style.transform = 'scale(0.95)';
+        
+        // Create big heart burst effect
+        createHearts(35);
+        
+        setTimeout(() => {
+          successScreen.style.opacity = '1';
+          successScreen.style.transform = 'scale(1)';
+          successScreen.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        }, 50);
+        
+        // Redirect after delay
+        setTimeout(function() {
+          // Fade out effect before redirect
+          document.body.style.opacity = '0';
+          document.body.style.transition = 'opacity 0.8s ease';
+          
+          setTimeout(() => {
+            window.location.href = "main.html"; // Change to your main page
+          }, 800);
+        }, 3500);
+      });
+      
+      // Create floating hearts animation with improved variety
+      function createHearts(count) {
+        const heartTypes = ['❤️', '💖', '💗', '💕', '💓'];
+        
+        for (let i = 0; i < count; i++) {
+          setTimeout(() => {
+            const heart = document.createElement('div');
+            heart.className = 'floating-hearts';
+            heart.innerHTML = heartTypes[Math.floor(Math.random() * heartTypes.length)];
+            heart.style.left = Math.random() * 80 + 10 + '%';
+            heart.style.top = Math.random() * 80 + 10 + '%';
+            heart.style.fontSize = (20 + Math.random() * 30) + 'px';
+            heart.style.animationDuration = (3 + Math.random() * 3) + 's';
+            heart.style.animationDelay = Math.random() + 's';
+            heart.style.transform = `rotate(${Math.random() * 40 - 20}deg)`;
+            document.querySelector('.login-container').appendChild(heart);
+            
+            // Remove heart after animation
+            setTimeout(() => {
+              heart.remove();
+            }, 6000);
+          }, i * 100);
+        }
+      }
+      
+      // Create subtle background animation
+      function createBackgroundEffect() {
+        const container = document.querySelector('.login-container');
+        
+        setInterval(() => {
+          if (Math.random() > 0.7) {
+            const heart = document.createElement('div');
+            heart.className = 'floating-hearts';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.top = Math.random() * 100 + '%';
+            heart.style.fontSize = (10 + Math.random() * 15) + 'px';
+            heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+            heart.style.opacity = '0.3';
+            container.appendChild(heart);
+            
+            setTimeout(() => {
+              heart.remove();
+            }, 6000);
+          }
+        }, 2000);
+      }
+      
+      // Initialize background effect
+      createBackgroundEffect();
+    });
+  </script>
+</body>
+</html>
